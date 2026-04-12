@@ -2,19 +2,21 @@
 
 import { useState, useEffect } from "react";
 import Image from "next/image";
+import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { motion, AnimatePresence } from "framer-motion";
 
 const NAV_LINKS = [
-  { label: "Home",     href: "hero"     },
-  { label: "About",    href: "about"    },
-  { label: "Programs", href: "programs" },
-  { label: "Contact",  href: "contact"  },
+  { label: "Home",     href: "/" },
+  { label: "About",    href: "/about" },
+  { label: "Programs", href: "/programs" },
+  { label: "Contact",  href: "/contact" },
 ];
 
 export default function Navbar() {
-  const [scrolled,      setScrolled]      = useState(false);
-  const [menuOpen,      setMenuOpen]      = useState(false);
-  const [activeSection, setActiveSection] = useState("hero");
+  const [scrolled, setScrolled] = useState(false);
+  const [menuOpen, setMenuOpen] = useState(false);
+  const pathname = usePathname();
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 60);
@@ -22,26 +24,6 @@ export default function Navbar() {
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
-
-  useEffect(() => {
-    const observers: IntersectionObserver[] = [];
-    NAV_LINKS.forEach(({ href }) => {
-      const el = document.getElementById(href);
-      if (!el) return;
-      const obs = new IntersectionObserver(
-        ([e]) => { if (e.isIntersecting) setActiveSection(href); },
-        { rootMargin: "-40% 0px -55% 0px" }
-      );
-      obs.observe(el);
-      observers.push(obs);
-    });
-    return () => observers.forEach(o => o.disconnect());
-  }, []);
-
-  const scrollTo = (id: string) => {
-    document.getElementById(id)?.scrollIntoView({ behavior: "smooth" });
-    setMenuOpen(false);
-  };
 
   return (
     <>
@@ -60,7 +42,7 @@ export default function Navbar() {
                         flex items-center justify-between h-[68px]">
 
           {/* Logo */}
-          <button onClick={() => scrollTo("hero")} className="flex-shrink-0" aria-label="Home">
+          <Link href="/" className="flex-shrink-0" aria-label="Home" onClick={() => setMenuOpen(false)}>
             <Image
               src="/logo.png" alt="Rogue Ninja Fight Club"
               width={160} height={44}
@@ -68,34 +50,35 @@ export default function Navbar() {
               className="h-10 w-auto"
               style={{ filter: "drop-shadow(0 0 10px rgba(200,20,20,.55))" }}
             />
-          </button>
+          </Link>
 
           {/* Desktop links */}
           <ul className="hidden md:flex items-center gap-1 lg:gap-2">
             {NAV_LINKS.map(({ label, href }) => (
               <li key={href}>
-                <button
-                  onClick={() => scrollTo(href)}
-                  className={`relative px-4 lg:px-5 py-[22px] text-[11px] font-medium tracking-[0.22em] uppercase
+                <Link
+                  href={href}
+                  onClick={() => setMenuOpen(false)}
+                  className={`relative px-4 lg:px-5 py-[22px] text-[11px] font-medium tracking-[0.22em] uppercase block
                               transition-colors duration-300
-                              ${activeSection === href ? "text-white" : "text-[#b08080] hover:text-white"}`}
+                              ${pathname === href ? "text-white" : "text-[#c4b5d4] hover:text-white"}`}
                 >
                   {label}
-                  {activeSection === href && (
+                  {pathname === href && (
                     <motion.span
                       layoutId="nav-indicator"
-                      className="absolute bottom-0 left-4 lg:left-5 right-4 lg:right-5 h-[2px] bg-[#cc1a1a] rounded-full"
-                      style={{ boxShadow: "0 0 12px rgba(204,26,26,.8)" }}
+                      className="absolute bottom-0 left-4 lg:left-5 right-4 lg:right-5 h-[2px] bg-[#7c3aed] rounded-full"
+                      style={{ boxShadow: "0 0 12px rgba(124,58,237,.8)" }}
                     />
                   )}
-                </button>
+                </Link>
               </li>
             ))}
           </ul>
 
           {/* CTA */}
-          <button
-            onClick={() => scrollTo("contact")}
+          <Link
+            href="/join"
             className="hidden md:inline-flex items-center
                        text-[11px] font-semibold tracking-[0.2em] uppercase
                        px-6 lg:px-7 py-2.5
@@ -104,7 +87,7 @@ export default function Navbar() {
                        hover:shadow-[0_0_24px_rgba(200,20,20,.45)]"
           >
             Join Now
-          </button>
+          </Link>
 
           {/* Hamburger (mobile only) */}
           <button
@@ -144,37 +127,46 @@ export default function Navbar() {
           >
             <div className="noise-layer absolute inset-0" />
             <div className="absolute top-0 left-0 right-0 h-[1px]"
-              style={{ background: "linear-gradient(90deg,transparent,#cc1a1a 40%,#cc1a1a 60%,transparent)" }} />
+              style={{ background: "linear-gradient(90deg,transparent,#7c3aed 40%,#7c3aed 60%,transparent)" }} />
 
             <div className="h-[68px] flex-shrink-0" />
 
             <nav className="relative z-10 flex flex-col items-start px-8 pt-10 gap-6 flex-1">
               {NAV_LINKS.map(({ label, href }, i) => (
-                <motion.button
+                <motion.div
                   key={href}
-                  onClick={() => scrollTo(href)}
                   initial={{ opacity: 0, x: -24 }}
                   animate={{ opacity: 1, x: 0 }}
                   exit={{ opacity: 0, x: -16 }}
                   transition={{ delay: i * 0.07 }}
-                  className={`font-display text-[52px] leading-none tracking-widest uppercase
-                              ${activeSection === href ? "text-[#cc1a1a]" : "text-[#d0a0a0] hover:text-white"}`}
                 >
-                  {label}
-                </motion.button>
+                  <Link
+                    href={href}
+                    onClick={() => setMenuOpen(false)}
+                    className={`font-display text-[52px] leading-none tracking-widest uppercase block
+                                ${pathname === href ? "text-[#9333ea]" : "text-[#d4c5e8] hover:text-white"}`}
+                  >
+                    {label}
+                  </Link>
+                </motion.div>
               ))}
 
-              <motion.button
-                onClick={() => scrollTo("contact")}
+              <motion.div
                 initial={{ opacity: 0, y: 16 }}
                 animate={{ opacity: 1, y: 0 }}
                 exit={{ opacity: 0 }}
                 transition={{ delay: 0.32 }}
-                className="mt-6 px-10 py-4 text-[11px] tracking-[0.25em] uppercase font-semibold
-                           bg-[#cc1a1a] text-white hover:bg-[#dd2222] transition-all duration-300"
+                className="mt-6"
               >
-                Join Now
-              </motion.button>
+                <Link
+                  href="/join"
+                  onClick={() => setMenuOpen(false)}
+                  className="inline-block px-10 py-4 text-[11px] tracking-[0.25em] uppercase font-semibold
+                             bg-[#cc1a1a] text-white hover:bg-[#dd2222] transition-all duration-300"
+                >
+                  Join Now
+                </Link>
+              </motion.div>
             </nav>
 
             <motion.div

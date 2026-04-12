@@ -2,6 +2,7 @@
 
 import { useEffect, useRef } from "react";
 import Image from "next/image";
+import { useRouter } from "next/navigation";
 
 export default function HeroSection() {
   const bgRef             = useRef<HTMLDivElement>(null);
@@ -63,8 +64,11 @@ export default function HeroSection() {
     init();
   }, []);
 
-  const scrollTo = (id: string) =>
-    document.getElementById(id)?.scrollIntoView({ behavior: "smooth" });
+  const router = useRouter();
+
+  const navigateTo = (path: string) => {
+    router.push(path);
+  };
 
   return (
     <section id="hero" className="relative min-h-screen flex flex-col items-center justify-center overflow-hidden">
@@ -75,17 +79,17 @@ export default function HeroSection() {
 
       {/* Overlays */}
       <div ref={overlayRef} className="absolute inset-0 z-[1]"
-        style={{ background:"linear-gradient(to bottom,rgba(6,4,4,.6) 0%,rgba(6,4,4,.22) 40%,rgba(6,4,4,.7) 75%,rgba(6,4,4,.99) 100%)" }} />
+        style={{ background:"linear-gradient(to bottom,rgba(8,5,15,.6) 0%,rgba(8,5,15,.22) 40%,rgba(8,5,15,.7) 75%,rgba(8,5,15,.99) 100%)" }} />
       <div className="absolute inset-0 z-[1] pointer-events-none"
-        style={{ background:"radial-gradient(ellipse 80% 70% at 50% 45%,rgba(120,0,0,.22) 0%,transparent 65%)" }} />
+        style={{ background:"radial-gradient(ellipse 80% 70% at 50% 45%,rgba(88,28,135,.22) 0%,transparent 65%)" }} />
       <div className="absolute inset-0 z-[1] pointer-events-none"
-        style={{ background:"linear-gradient(90deg,rgba(6,4,4,.5) 0%,transparent 16%,transparent 84%,rgba(6,4,4,.5) 100%)" }} />
+        style={{ background:"linear-gradient(90deg,rgba(8,5,15,.5) 0%,transparent 16%,transparent 84%,rgba(8,5,15,.5) 100%)" }} />
 
       {/* Noise + Scanline + Top line */}
       <div className="noise-layer absolute inset-0 z-[2]" />
       <div className="scanline z-[3]" />
       <div className="absolute top-0 left-0 right-0 h-[1px] z-[4]"
-        style={{ background:"linear-gradient(90deg,transparent 0%,#cc1a1a 40%,#cc1a1a 60%,transparent 100%)", boxShadow:"0 0 40px 8px rgba(200,20,20,.18)" }} />
+        style={{ background:"linear-gradient(90deg,transparent 0%,#7c3aed 40%,#7c3aed 60%,transparent 100%)", boxShadow:"0 0 40px 8px rgba(124,58,237,.25)" }} />
 
       {/* Content */}
       <div className="relative z-[5] w-full max-w-7xl mx-auto px-5 sm:px-8 lg:px-12 xl:px-16
@@ -103,7 +107,7 @@ export default function HeroSection() {
             src="/logo.png" alt="Rogue Ninja Fight Club"
             width={780} height={220} priority
             className="w-full max-w-[240px] sm:max-w-[400px] md:max-w-[560px] lg:max-w-[680px] xl:max-w-[780px] h-auto select-none"
-            style={{ filter:"drop-shadow(0 0 40px rgba(220,30,30,.65)) drop-shadow(0 0 100px rgba(180,0,0,.35))" }}
+            style={{ filter:"drop-shadow(0 0 40px rgba(124,58,237,.65)) drop-shadow(0 0 100px rgba(100,20,200,.35))" }}
           />
         </div>
 
@@ -130,22 +134,22 @@ export default function HeroSection() {
 
         {/* Sub */}
         <p ref={subRef} style={{ opacity: 0 }}
-          className="text-sm lg:text-base text-[#b89090] tracking-[0.08em] max-w-md lg:max-w-lg leading-relaxed">
+          className="text-sm lg:text-base text-[#c4b5d4] tracking-[0.08em] max-w-md lg:max-w-lg leading-relaxed">
           Strength, discipline, and elite fight training for warriors of every level.
         </p>
 
         {/* CTAs */}
         <div ref={ctaRef} style={{ opacity: 0 }} className="flex flex-col sm:flex-row gap-4">
-          <button onClick={() => scrollTo("programs")} id="cta-start-training"
+          <button onClick={() => navigateTo("/programs")} id="cta-start-training"
             className="px-10 py-4 text-[11px] tracking-[0.25em] uppercase font-semibold text-white
                        bg-[#cc1a1a] hover:bg-[#dd2222] transition-all duration-300
                        hover:shadow-[0_0_50px_rgba(200,20,20,.5)]">
             Start Training
           </button>
-          <button onClick={() => scrollTo("about")} id="cta-our-story"
+          <button onClick={() => navigateTo("/about")} id="cta-our-story"
             className="px-10 py-4 text-[11px] tracking-[0.25em] uppercase font-medium
-                       text-[#c09090] border border-[#2a0f0f]
-                       hover:border-[#cc1a1a] hover:text-white transition-all duration-300">
+                       text-[#c4b5d4] border border-[#1a0f2e]
+                       hover:border-[#7c3aed] hover:text-white transition-all duration-300">
             Our Story
           </button>
         </div>
@@ -153,7 +157,7 @@ export default function HeroSection() {
         {/* Stats */}
         <div ref={statsRef} style={{ opacity: 0 }}
           className="flex items-center gap-8 sm:gap-10 lg:gap-16 mt-4 pt-5
-                     border-t border-[#1e0707] justify-center w-full max-w-sm sm:max-w-none">
+                     border-t border-[#1a0f2e] justify-center w-full max-w-sm sm:max-w-none">
           {[
             { num: "500+", label: "Members"       },
             { num: "12+",  label: "Elite Coaches" },
@@ -161,7 +165,7 @@ export default function HeroSection() {
           ].map(s => (
             <div key={s.label} className="flex flex-col items-center gap-1">
               <span className="text-2xl sm:text-3xl lg:text-4xl font-display text-white tracking-wide">{s.num}</span>
-              <span className="text-[9px] tracking-[0.25em] uppercase text-[#9a7070]">{s.label}</span>
+              <span className="text-[9px] tracking-[0.25em] uppercase text-[#9d8bba]">{s.label}</span>
             </div>
           ))}
         </div>
@@ -170,8 +174,8 @@ export default function HeroSection() {
       {/* Scroll indicator */}
       <div ref={scrollIndicatorRef} style={{ opacity: 0 }}
         className="absolute bottom-8 left-1/2 flex flex-col items-center gap-2 scroll-indicator">
-        <span className="text-[8px] tracking-[0.3em] uppercase text-[#8a5555]">Scroll</span>
-        <div className="w-[1px] h-8 bg-gradient-to-b from-[#cc1a1a] to-transparent" />
+        <span className="text-[8px] tracking-[0.3em] uppercase text-[#6b5a8e]">Scroll</span>
+        <div className="w-[1px] h-8 bg-gradient-to-b from-[#7c3aed] to-transparent" />
       </div>
     </section>
   );

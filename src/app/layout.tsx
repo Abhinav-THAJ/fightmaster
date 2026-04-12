@@ -2,6 +2,13 @@ import type { Metadata, Viewport } from "next";
 import { Inter, Bebas_Neue, Barlow_Condensed } from "next/font/google";
 import "./globals.css";
 
+import Navbar from "@/components/Navbar";
+import Footer from "@/components/Footer";
+import PreloaderWrapper from "@/components/PreloaderWrapper";
+import SmoothScroll from "@/components/SmoothScroll";
+import CustomCursor from "@/components/CustomCursor";
+import ScrollUpButton from "@/components/ScrollUpButton";
+
 const inter = Inter({
   subsets: ["latin"],
   variable: "--font-inter",
@@ -74,8 +81,14 @@ export default function RootLayout({
         <link rel="icon" href="/favicon.ico" />
         <link rel="apple-touch-icon" href="/logo.png" />
       </head>
-      <body className="min-h-full bg-[#060404] text-white overflow-x-hidden">
+      <body className="min-h-full bg-[#060404] text-white overflow-x-hidden cursor-none">
+        <CustomCursor />
+        <PreloaderWrapper />
+        <SmoothScroll />
+        <Navbar />
         {children}
+        <Footer />
+        <ScrollUpButton />
       </body>
     </html>
   );

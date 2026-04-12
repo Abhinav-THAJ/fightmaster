@@ -27,26 +27,32 @@ export default function SmoothScroll() {
           infinite: false,
         });
 
-        const raf = (time: number) => {
-          lenis.raf(time);
-          requestAnimationFrame(raf);
-        };
+        let rafId: number;
 
-        requestAnimationFrame(raf);
-
-        // Integrate with GSAP ScrollTrigger
+        // Integrate with GSAP ScrollTrigger if available
         try {
           const gsap = (await import("gsap")).default;
           const { ScrollTrigger } = await import("gsap/ScrollTrigger");
           gsap.registerPlugin(ScrollTrigger);
+          
           lenis.on("scroll", ScrollTrigger.update);
-          gsap.ticker.add((time: number) => lenis.raf(time * 1000));
+          gsap.ticker.add((time: number) => {
+            lenis.raf(time * 1000);
+          });
           gsap.ticker.lagSmoothing(0);
         } catch {
-          // GSAP not available, lenis runs standalone
+          // GSAP not available, drive lenis via native requestAnimationFrame
+          const raf = (time: number) => {
+            lenis.raf(time);
+            rafId = requestAnimationFrame(raf);
+          };
+          rafId = requestAnimationFrame(raf);
         }
 
-        return () => lenis.destroy();
+        return () => {
+          if (rafId) cancelAnimationFrame(rafId);
+          lenis.destroy();
+        };
       } catch {
         // lenis not installed - use native smooth scroll
         document.documentElement.style.scrollBehavior = "smooth";

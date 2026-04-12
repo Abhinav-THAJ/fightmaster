@@ -2,12 +2,40 @@
 
 import { useEffect, useRef, useState } from "react";
 
+const LOCATIONS = [
+  {
+    id: "loc1",
+    name: "Greenfield Stadium",
+    address: "Travancore International Convention Centre, Greenfield International Stadium, Trivandrum B1, Thiruvananthapuram, Kerala 695581",
+    mapUrl: "https://maps.app.goo.gl/cy8rrgsP9P9gbr2s9",
+    embedSrc:
+      "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3944.2!2d76.8855372!3d8.5728398!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3b05bfa288af49d7%3A0xbd95ab45ce4cb2bb!2sROGUENINJA%20FIGHT%20CLUB!5e0!3m2!1sen!2sin!4v1700000000000!5m2!1sen!2sin",
+  },
+  {
+    id: "loc2",
+    name: "Sasthamangalam",
+    address: "4th Floor, Sharmees Tower, Sasthamangalam Maruthankuzhi Rd, Sasthamangalam, Thiruvananthapuram, Kerala 695010",
+    mapUrl: "https://maps.app.goo.gl/tnZSuxwQGRMtw2xn7",
+    embedSrc:
+      "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3945.8!2d76.9719408!3d8.5133368!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3b05bb00217bf493%3A0x6b827fadead4b99d!2sROGUENINJA%20FIGHT%20CLUB!5e0!3m2!1sen!2sin!4v1700000000001!5m2!1sen!2sin",
+  },
+  {
+    id: "loc3",
+    name: "Perumkadavila",
+    address: "Venkateshwara Towers, Amaravila - Perumkadavila Rd, Perumkadavila, Kerala 695124",
+    mapUrl: "https://maps.app.goo.gl/DCRe6oBukgsenB9UA",
+    embedSrc:
+      "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3947.5!2d77.1091048!3d8.4381515!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3b05ad00010a1c51%3A0xc2d4760d80cd438!2sROGUENINJA%20FIGHT%20CLUB!5e0!3m2!1sen!2sin!4v1700000000002!5m2!1sen!2sin",
+  },
+];
+
 export default function ContactSection() {
   const sectionRef = useRef<HTMLElement>(null);
   const formRef    = useRef<HTMLFormElement>(null);
   const infoRef    = useRef<HTMLDivElement>(null);
-  const [submitted, setSubmitted] = useState(false);
-  const [focused,   setFocused]   = useState<string | null>(null);
+  const [submitted,  setSubmitted] = useState(false);
+  const [focused,    setFocused]   = useState<string | null>(null);
+  const [activeMap,  setActiveMap] = useState(0);
 
   useEffect(() => {
     const init = async () => {
@@ -19,9 +47,11 @@ export default function ContactSection() {
         if (!section) return;
         const ctx = gsap.context(() => {
           gsap.fromTo(infoRef.current, { x: -50, opacity: 0 },
-            { x: 0, opacity: 1, duration: 0.9, ease: "power3.out", scrollTrigger: { trigger: section, start: "top 80%" } });
-          gsap.fromTo(formRef.current, { x:  50, opacity: 0 },
-            { x: 0, opacity: 1, duration: 0.9, ease: "power3.out", scrollTrigger: { trigger: section, start: "top 80%" } });
+            { x: 0, opacity: 1, duration: 0.9, ease: "power3.out",
+              scrollTrigger: { trigger: section, start: "top 80%" } });
+          gsap.fromTo(formRef.current, { x: 50, opacity: 0 },
+            { x: 0, opacity: 1, duration: 0.9, ease: "power3.out",
+              scrollTrigger: { trigger: section, start: "top 80%" } });
         }, section);
         return () => ctx.revert();
       } catch { /* silent */ }
@@ -33,65 +63,138 @@ export default function ContactSection() {
 
   const inputCls = (name: string) =>
     `bg-transparent border px-5 py-4 text-sm text-white w-full outline-none transition-all duration-300 ${
-      focused === name ? "border-[#cc1a1a] shadow-[0_0_16px_rgba(204,26,26,.15)]" : "border-[#1e0707]"
+      focused === name
+        ? "border-[#cc1a1a] shadow-[0_0_16px_rgba(204,26,26,.15)]"
+        : "border-[#1e0707]"
     }`;
 
   return (
     <section id="contact" ref={sectionRef}
       className="relative py-20 sm:py-28 lg:py-32 xl:py-36 overflow-hidden">
       <div className="absolute inset-0 pointer-events-none"
-        style={{ background:"radial-gradient(ellipse 70% 60% at 50% 50%,rgba(80,0,0,.12) 0%,transparent 70%)" }} />
+        style={{ background: "radial-gradient(ellipse 70% 60% at 50% 50%,rgba(60,20,120,.12) 0%,transparent 70%)" }} />
       <div className="absolute top-0 left-0 right-0 h-px red-sep" />
 
       <div className="max-w-7xl mx-auto px-5 sm:px-8 lg:px-12 xl:px-16">
 
-        {/* Heading */}
+        {/* ── Heading ─────────────────────────────────────────────── */}
         <div className="flex flex-col items-center mb-14 lg:mb-16">
           <div className="flex items-center gap-4 mb-5">
-            <div className="w-8 h-px bg-[#cc1a1a]" />
-            <span className="text-[10px] tracking-[0.5em] uppercase text-[#cc6666]">Contact</span>
-            <div className="w-8 h-px bg-[#cc1a1a]" />
+            <div className="w-8 h-px bg-[#7c3aed]" />
+            <span className="text-[10px] tracking-[0.5em] uppercase text-[#a78bda]">Contact</span>
+            <div className="w-8 h-px bg-[#7c3aed]" />
           </div>
           <h2 className="font-display text-white leading-none w-full"
-            style={{ fontSize:"clamp(2.8rem,6vw,5rem)", textAlign:"center" }}>
+            style={{ fontSize: "clamp(2.8rem,6vw,5rem)", textAlign: "center" }}>
             BEGIN YOUR<br />
             <span className="text-gradient-red">JOURNEY TODAY</span>
           </h2>
-          <p className="mt-4 text-sm lg:text-[15px] text-[#b89090] max-w-md leading-relaxed" style={{ textAlign:"center" }}>
+          <p className="mt-4 text-sm lg:text-[15px] text-[#c4b5d4] max-w-md leading-relaxed"
+            style={{ textAlign: "center" }}>
             First class is on us. Walk in as a beginner, leave as a warrior.
           </p>
         </div>
 
-        {/* Grid */}
+        {/* ── Two-column grid ─────────────────────────────────────── */}
         <div className="grid lg:grid-cols-2 gap-10 lg:gap-16 xl:gap-24">
 
-          {/* Info */}
+          {/* LEFT — Info + Maps */}
           <div ref={infoRef} className="flex flex-col gap-6">
+
+            {/* Contact details */}
             {[
-              { label:"Address", value:"42 Dojo Street, Fight District, City 10001", icon:"📍" },
-              { label:"Phone",   value:"+1 (555) 888-NINJA",                          icon:"📞" },
-              { label:"Email",   value:"train@rogueninja.com",                         icon:"✉️"  },
-              { label:"Hours",   value:"Mon–Sat: 06:00 – 21:00 · Sun: 08:00 – 14:00", icon:"🕐"  },
+              { label: "Phone", value: "+91 73563 30770  ·  +91 90485 64432", icon: "📞" },
+              { label: "Email", value: "rogueninjafc@gmail.com", icon: "✉️" },
+              { label: "Hours", value: "Mon–Sat: 06:00 – 21:00 · Sun: 08:00 – 14:00", icon: "🕐" },
             ].map(item => (
               <div key={item.label} className="flex items-start gap-4 pb-5 border-b border-[#1e0707]">
                 <div className="w-10 h-10 flex items-center justify-center text-base flex-shrink-0"
-                  style={{ background:"rgba(204,26,26,.08)", border:"1px solid rgba(204,26,26,.2)" }}>
+                  style={{ background: "rgba(124,58,237,.08)", border: "1px solid rgba(124,58,237,.2)" }}>
                   {item.icon}
                 </div>
                 <div>
-                  <p className="text-[9px] tracking-[0.3em] uppercase text-[#cc6666] mb-1">{item.label}</p>
-                  <p className="text-sm lg:text-[15px] text-[#b89090]">{item.value}</p>
+                  <p className="text-[9px] tracking-[0.3em] uppercase text-[#a78bda] mb-1">{item.label}</p>
+                  <p className="text-sm lg:text-[15px] text-[#c4b5d4]">{item.value}</p>
                 </div>
               </div>
             ))}
 
+            {/* ── Location tabs ──────────────────────────────────── */}
+            <div className="flex flex-col gap-4">
+              <div className="flex items-center gap-3">
+                <div className="w-1.5 h-1.5 rounded-full bg-[#cc1a1a]" />
+                <p className="text-[9px] tracking-[0.35em] uppercase text-[#6b5a8e]">Our 3 Branches</p>
+              </div>
+
+              {/* Tab buttons */}
+              <div className="grid grid-cols-3 gap-2">
+                {LOCATIONS.map((loc, i) => (
+                  <button
+                    key={loc.id}
+                    onClick={() => setActiveMap(i)}
+                    className={`py-2.5 px-2 text-[9px] tracking-[0.12em] uppercase font-semibold leading-tight
+                                transition-all duration-300 text-center
+                                ${activeMap === i
+                                  ? "bg-[#7c3aed] text-white"
+                                  : "border border-[#1a0f2e] text-[#8b7aa0] hover:border-[#7c3aed]/40 hover:text-white"}`}
+                  >
+                    {loc.name}
+                  </button>
+                ))}
+              </div>
+
+              {/* Address badge */}
+              <div className="flex items-start gap-3 p-4 border border-[#1a0f2e] bg-[#0e0818]">
+                <span className="text-[#cc1a1a] text-base flex-shrink-0 mt-0.5">📍</span>
+                <p className="text-[12px] text-[#9d8bba] leading-relaxed">{LOCATIONS[activeMap].address}</p>
+              </div>
+
+              {/* Map iframe — grayscale / dark tinted */}
+              <div className="relative w-full overflow-hidden border border-[#1a0f2e]"
+                style={{ height: "240px" }}>
+                <div className="absolute inset-0 pointer-events-none z-10"
+                  style={{ boxShadow: "inset 0 0 40px rgba(0,0,0,.6)" }} />
+                <iframe
+                  key={activeMap}
+                  src={LOCATIONS[activeMap].embedSrc}
+                  width="100%"
+                  height="100%"
+                  style={{ border: 0, filter: "grayscale(1) brightness(0.65) contrast(1.15)" }}
+                  allowFullScreen
+                  loading="lazy"
+                  referrerPolicy="no-referrer-when-downgrade"
+                  title={`ROGUENINJA FIGHT CLUB — ${LOCATIONS[activeMap].name}`}
+                />
+              </div>
+
+              {/* Open in Maps link */}
+              <a
+                href={LOCATIONS[activeMap].mapUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-2 self-start
+                           text-[10px] tracking-[0.2em] uppercase text-[#cc6666]
+                           hover:text-white transition-colors duration-300 group"
+              >
+                <svg width="11" height="11" viewBox="0 0 24 24" fill="none"
+                  stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"
+                  className="group-hover:scale-110 transition-transform duration-200">
+                  <path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6" />
+                  <polyline points="15 3 21 3 21 9" />
+                  <line x1="10" y1="14" x2="21" y2="3" />
+                </svg>
+                Get Directions — {LOCATIONS[activeMap].name}
+              </a>
+            </div>
+
+            {/* Social */}
             <div>
-              <p className="text-[9px] tracking-[0.3em] uppercase text-[#7a5555] mb-4">Follow Us</p>
+              <p className="text-[9px] tracking-[0.3em] uppercase text-[#6b5a8e] mb-4">Follow Us</p>
               <div className="flex gap-4">
-                {["Instagram","Facebook","YouTube"].map(s => (
+                {["Instagram", "Facebook", "YouTube"].map(s => (
                   <a key={s} href="#"
-                    className="text-[10px] tracking-[0.2em] uppercase py-2.5 px-4 border border-[#1e0707]
-                               text-[#a07070] hover:border-[#cc1a1a] hover:text-white transition-all duration-300">
+                    className="text-[10px] tracking-[0.2em] uppercase py-2.5 px-4 border border-[#1a0f2e]
+                               text-[#9d8bba] hover:border-[#7c3aed] hover:text-white transition-all duration-300">
                     {s}
                   </a>
                 ))}
@@ -99,12 +202,12 @@ export default function ContactSection() {
             </div>
           </div>
 
-          {/* Form */}
+          {/* RIGHT — Form */}
           {submitted ? (
             <div className="flex flex-col items-center justify-center text-center gap-6 py-16
                             border border-[#1e0707] bg-[#090202]">
               <div className="w-16 h-16 rounded-full flex items-center justify-center text-2xl text-[#cc1a1a]"
-                style={{ background:"rgba(204,26,26,.1)", border:"1px solid rgba(204,26,26,.3)", boxShadow:"0 0 30px rgba(204,26,26,.15)" }}>
+                style={{ background: "rgba(204,26,26,.1)", border: "1px solid rgba(204,26,26,.3)", boxShadow: "0 0 30px rgba(204,26,26,.15)" }}>
                 ✓
               </div>
               <div>
@@ -131,9 +234,24 @@ export default function ContactSection() {
                 <label htmlFor="contact-phone" className="text-[10px] tracking-[0.3em] uppercase text-[#a07070]">
                   Phone <span className="text-[#cc1a1a]">*</span>
                 </label>
-                <input id="contact-phone" type="tel" required placeholder="+1 000 000 0000"
+                <input id="contact-phone" type="tel" required placeholder="+91 00000 00000"
                   onFocus={() => setFocused("phone")} onBlur={() => setFocused(null)}
                   className={inputCls("phone")} />
+              </div>
+
+              {/* Branch preference */}
+              <div className="flex flex-col gap-2">
+                <label htmlFor="contact-branch" className="text-[10px] tracking-[0.3em] uppercase text-[#a07070]">
+                  Preferred Branch
+                </label>
+                <select id="contact-branch"
+                  onFocus={() => setFocused("branch")} onBlur={() => setFocused(null)}
+                  className={inputCls("branch")} style={{ backgroundImage: "none" }}>
+                  <option value="" className="bg-[#0d0202]">Select a branch…</option>
+                  {LOCATIONS.map(l => (
+                    <option key={l.id} value={l.id} className="bg-[#0d0202]">{l.name}</option>
+                  ))}
+                </select>
               </div>
 
               <div className="flex flex-col gap-2">
@@ -151,11 +269,12 @@ export default function ContactSection() {
                            hover:shadow-[0_0_40px_rgba(200,20,20,.4)]">
                 Join Now / Enquire
               </button>
-              <p className="text-[9px] text-[#5a3535] tracking-[0.15em]" style={{ textAlign:"center" }}>
+              <p className="text-[9px] text-[#5a3535] tracking-[0.15em]" style={{ textAlign: "center" }}>
                 No spam. We only contact about your training.
               </p>
             </form>
           )}
+
         </div>
       </div>
     </section>

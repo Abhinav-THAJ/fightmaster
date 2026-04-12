@@ -41,8 +41,8 @@ export default function AboutSection() {
           {/* TEXT */}
           <div ref={textRef} className="flex flex-col gap-5 lg:gap-6">
             <div className="flex items-center gap-4">
-              <div className="w-8 h-px bg-[#cc1a1a]" />
-              <span className="text-[10px] tracking-[0.5em] uppercase text-[#cc6666]">About Us</span>
+              <div className="w-8 h-px bg-[#7c3aed]" />
+              <span className="text-[10px] tracking-[0.5em] uppercase text-[#a78bda]">About Us</span>
             </div>
 
             <h2 className="font-display leading-none text-white"
@@ -52,30 +52,29 @@ export default function AboutSection() {
               ARE MADE
             </h2>
 
-            <div className="flex flex-col gap-4 text-[#b89090] text-sm lg:text-[15px] leading-relaxed">
+            <div className="flex flex-col gap-4 text-[#c4b5d4] text-sm lg:text-[15px] leading-relaxed">
               <p>
-                Rogue Ninja Fight Club is not just a gym — it&apos;s a brotherhood forged in
-                discipline, sweat, and the relentless pursuit of excellence. Founded by
-                champion fighters, our dojo trains beginners and elite athletes alike.
+                ROGUENINJA FC is a combat sports fight club specializing in kickboxing, Muay Thai, and strength training. We focus on developing powerful, disciplined fighters through elite-level striking and functional strength.
               </p>
               <p>
-                We combine traditional martial arts wisdom with modern combat sports science
-                to produce fighters who are not just physically superior — but mentally
-                unbreakable.
+                Within just 1½ years, RogueNinja FC has produced multiple national champions, national players, and state champions, and proudly secured the Overall Championship Trophy at the TVM District Kickboxing Championship.
+              </p>
+              <p className="uppercase text-[#a78bda] text-xs tracking-wider font-semibold mt-2 border-l-2 border-[#7c3aed] pl-4">
+                Our trainers are champions themselves and highly experienced competitors, ensuring world-class coaching rooted in real fight experience. Built on respect, resilience, and intensity, RogueNinja FC is where champions are forged.
               </p>
             </div>
 
-            <div ref={statsRef} className="flex flex-col gap-4 mt-1">
+            <div ref={statsRef} className="flex flex-col gap-4 mt-6">
               {[
-                { title: "Discipline",     desc: "Every session forges the mind as much as the body." },
-                { title: "Mindset",        desc: "We cultivate warriors who never quit, never break." },
-                { title: "Transformation", desc: "Walk in ordinary. Leave extraordinary." },
+                { title: "Elite Striking",     desc: "Specialized training in Kickboxing and Muay Thai disciplines." },
+                { title: "Real Experience",        desc: "World-class coaching from highly experienced competitors." },
+                { title: "Champion Forged", desc: "Built on strict respect, resilience, and pure intensity." },
               ].map(item => (
-                <div key={item.title} className="stat-item flex items-start gap-4 pb-4 border-b border-[#1e0707]">
-                  <div className="w-1.5 h-1.5 rounded-full bg-[#cc1a1a] mt-2 flex-shrink-0" />
+                <div key={item.title} className="stat-item flex items-start gap-4 pb-4 border-b border-[#1a0f2e]">
+                  <div className="w-1.5 h-1.5 rounded-full bg-[#7c3aed] mt-2 flex-shrink-0" />
                   <div>
                     <span className="text-[11px] tracking-[0.2em] uppercase text-white font-semibold">{item.title}</span>
-                    <p className="text-[12px] text-[#8a6060] mt-0.5">{item.desc}</p>
+                    <p className="text-[12px] text-[#8b7aa0] mt-0.5">{item.desc}</p>
                   </div>
                 </div>
               ))}
@@ -84,29 +83,29 @@ export default function AboutSection() {
 
           {/* IMAGE */}
           <div ref={imageRef} className="relative mt-8 lg:mt-0">
-            <div className="relative aspect-[4/5] overflow-hidden rounded-sm border border-[#1e0707]">
+            <div className="relative aspect-[4/5] overflow-hidden rounded-sm border border-[#1a0f2e]">
               <Image
-                src="/about_image.png" alt="Training at Rogue Ninja"
+                src="/ai_dojo.png" alt="Training at Rogue Ninja Dojo"
                 fill className="object-cover object-center"
                 sizes="(max-width: 1024px) 100vw, 50vw"
               />
               <div className="absolute inset-0"
-                style={{ background: "linear-gradient(to bottom,transparent 60%,rgba(6,4,4,.85) 100%)" }} />
+                style={{ background: "linear-gradient(to bottom,transparent 60%,rgba(8,5,15,.85) 100%)" }} />
               <div className="absolute bottom-6 left-6">
-                <div className="text-[9px] tracking-[0.4em] uppercase text-[#cc1a1a] mb-1">Est. 2024</div>
-                <div className="text-[11px] tracking-[0.15em] uppercase text-[#b08080]">Discipline · Honor · Power</div>
+                <div className="text-[9px] tracking-[0.4em] uppercase text-[#a78bda] mb-1">Champions Forged Here</div>
+                <div className="text-[11px] tracking-[0.15em] uppercase text-[#c4b5d4]">Respect · Resilience · Intensity</div>
               </div>
             </div>
             {/* Corner accents */}
-            <div className="absolute -top-3 -left-3 w-10 h-10 border-t-2 border-l-2 border-[#cc1a1a]" />
-            <div className="absolute -bottom-3 -right-3 w-10 h-10 border-b-2 border-r-2 border-[#cc1a1a]" />
+            <div className="absolute -top-3 -left-3 w-10 h-10 border-t-2 border-l-2 border-[#7c3aed]" />
+            <div className="absolute -bottom-3 -right-3 w-10 h-10 border-b-2 border-r-2 border-[#7c3aed]" />
             {/* Floating badge */}
             <div className="absolute -right-4 sm:-right-6 xl:-right-10 top-1/4
-                            bg-[#0a0202] border border-[#1e0707] p-4 lg:p-5"
+                            bg-[#0e0818] border border-[#1a0f2e] p-4 lg:p-5"
               style={{ boxShadow: "0 0 40px rgba(0,0,0,.6)" }}>
-              <div className="text-3xl lg:text-4xl font-display text-[#cc1a1a]">3x</div>
-              <div className="text-[9px] tracking-[0.25em] uppercase text-[#8a6060] mt-1">
-                Championship<br />Titles
+              <div className="text-3xl lg:text-4xl font-display text-[#9333ea]">1.5<span className="text-xl">yrs</span></div>
+              <div className="text-[9px] tracking-[0.25em] uppercase text-[#8b7aa0] mt-1">
+                To Overall<br />Trophy
               </div>
             </div>
           </div>

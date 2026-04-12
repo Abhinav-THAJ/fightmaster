@@ -1,9 +1,11 @@
 "use client";
 
 import { useEffect, useRef } from "react";
+import { useRouter } from "next/navigation";
 
 export default function CTABanner() {
   const sectionRef = useRef<HTMLElement>(null);
+  const router = useRouter();
 
   useEffect(() => {
     const init = async () => {
@@ -24,17 +26,22 @@ export default function CTABanner() {
   }, []);
 
   return (
-    <section ref={sectionRef} className="relative py-20 sm:py-24 lg:py-28 px-5 overflow-hidden">
-      <div className="absolute inset-0 pointer-events-none glow-pulse"
-        style={{ background:"radial-gradient(ellipse 70% 80% at 50% 50%,rgba(120,0,0,.18) 0%,transparent 70%)" }} />
-      <div className="absolute top-0 left-0 right-0 h-px red-sep" />
-      <div className="absolute bottom-0 left-0 right-0 h-px red-sep" />
+    <section ref={sectionRef} className="relative py-20 sm:py-24 lg:py-28 px-5 overflow-hidden min-h-[70vh] flex items-center">
+      {/* Background Image */}
+      <div className="absolute inset-0 z-0">
+        <div className="absolute inset-0 bg-[url('/ai_contact_bg.png')] bg-cover bg-center opacity-40 blur-[2px] transition-transform duration-1000 scale-105 hover:scale-100" />
+      </div>
 
-      <div className="cta-banner-content relative z-10 max-w-3xl mx-auto flex flex-col items-center">
+      <div className="absolute inset-0 pointer-events-none glow-pulse z-[1]"
+        style={{ background:"radial-gradient(ellipse 80% 80% at 50% 50%,rgba(6,4,4,0.3) 0%,rgba(6,4,4,0.95) 70%)" }} />
+      <div className="absolute top-0 left-0 right-0 h-px red-sep z-[1]" />
+      <div className="absolute bottom-0 left-0 right-0 h-px red-sep z-[1]" />
+
+      <div className="cta-banner-content relative z-10 max-w-4xl mx-auto flex flex-col items-center">
         <div className="flex items-center gap-4 mb-6">
-          <div className="w-8 h-px bg-[#cc1a1a]" />
-          <span className="text-[10px] tracking-[0.5em] uppercase text-[#cc6666]">Ready to Begin?</span>
-          <div className="w-8 h-px bg-[#cc1a1a]" />
+          <div className="w-8 h-px bg-[#7c3aed]" />
+          <span className="text-[10px] tracking-[0.5em] uppercase text-[#a78bda]">Ready to Begin?</span>
+          <div className="w-8 h-px bg-[#7c3aed]" />
         </div>
 
         <h2 className="font-display text-white leading-none mb-6 w-full"
@@ -43,14 +50,18 @@ export default function CTABanner() {
           <span className="text-gradient-red">FREE TRIAL CLASS</span>
         </h2>
 
-        <p className="text-sm lg:text-[15px] text-[#b89090] mb-10 max-w-lg leading-relaxed" style={{ textAlign:"center" }}>
-          First class is on us. No commitment, no pressure. Just pure training.
-          Walk in a beginner. Leave as a warrior.
-        </p>
+        <div className="flex flex-col gap-4 text-sm lg:text-[15px] text-[#c4b5d4] mb-10 max-w-2xl leading-relaxed text-center">
+          <p>
+            First class is on us. No commitment, no pressure. Just pure training in our state-of-the-art facility. Experience exactly what it feels like to train alongside professional athletes and elite combat artists.
+          </p>
+          <p>
+            Whether you&apos;re looking to step into the cage, learn self-defense, or simply get in the best shape of your life, Rogue Ninja Fight Club is your ultimate training ground. Walk in a beginner. Leave as a warrior.
+          </p>
+        </div>
 
         <div className="flex flex-col sm:flex-row gap-4">
           <button
-            onClick={() => document.getElementById("contact")?.scrollIntoView({ behavior:"smooth" })}
+            onClick={() => router.push('/contact')}
             id="cta-banner-btn"
             className="px-12 py-4 text-[11px] tracking-[0.25em] uppercase font-semibold
                        bg-[#cc1a1a] text-white hover:bg-[#dd2222] transition-all duration-300
@@ -58,10 +69,10 @@ export default function CTABanner() {
             Claim Free Trial
           </button>
           <button
-            onClick={() => document.getElementById("programs")?.scrollIntoView({ behavior:"smooth" })}
+            onClick={() => router.push('/programs')}
             className="px-12 py-4 text-[11px] tracking-[0.25em] uppercase font-medium
-                       text-[#c09090] border border-[#2a0f0f]
-                       hover:border-[#cc1a1a] hover:text-white transition-all duration-300">
+                       text-[#c4b5d4] border border-[#1a0f2e]
+                       hover:border-[#7c3aed] hover:text-white transition-all duration-300">
             View Programs
           </button>
         </div>
