@@ -47,7 +47,7 @@ export default function Navbar() {
               src="/logo.png" alt="Rogue Ninja Fight Club"
               width={160} height={44}
               priority
-              className="h-10 w-auto"
+              className="h-11 sm:h-10 w-auto"
               style={{ filter: "drop-shadow(0 0 10px rgba(200,20,20,.55))" }}
             />
           </Link>
@@ -91,24 +91,24 @@ export default function Navbar() {
 
           {/* Hamburger (mobile only) */}
           <button
-            className="md:hidden flex flex-col justify-center gap-[5px] w-10 h-10 z-[60]"
+            className="md:hidden flex flex-col justify-center gap-[6px] w-12 h-12 items-end z-[60]"
             onClick={() => setMenuOpen(!menuOpen)}
             aria-label="Toggle menu"
           >
             <motion.span
-              animate={menuOpen ? { rotate: 45, y: 6 } : { rotate: 0, y: 0 }}
+              animate={menuOpen ? { rotate: 45, y: 7 } : { rotate: 0, y: 0 }}
               transition={{ duration: 0.25 }}
-              className="block h-[2px] w-5 bg-[#cc1a1a] origin-center rounded-full"
+              className="block h-[2.5px] w-6 bg-[#cc1a1a] origin-center rounded-full"
             />
             <motion.span
               animate={menuOpen ? { opacity: 0 } : { opacity: 1 }}
               transition={{ duration: 0.2 }}
-              className="block h-[2px] w-3.5 bg-[#cc1a1a] rounded-full"
+              className="block h-[2.5px] w-4.5 bg-[#cc1a1a] rounded-full"
             />
             <motion.span
-              animate={menuOpen ? { rotate: -45, y: -6 } : { rotate: 0, y: 0 }}
+              animate={menuOpen ? { rotate: -45, y: -7 } : { rotate: 0, y: 0 }}
               transition={{ duration: 0.25 }}
-              className="block h-[2px] w-5 bg-[#cc1a1a] origin-center rounded-full"
+              className="block h-[2.5px] w-6 bg-[#cc1a1a] origin-center rounded-full"
             />
           </button>
         </div>

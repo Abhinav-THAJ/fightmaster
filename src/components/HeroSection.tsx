@@ -106,7 +106,7 @@ export default function HeroSection() {
           <Image
             src="/logo.png" alt="Rogue Ninja Fight Club"
             width={780} height={220} priority
-            className="w-full max-w-[240px] sm:max-w-[400px] md:max-w-[560px] lg:max-w-[680px] xl:max-w-[780px] h-auto select-none"
+            className="w-full max-w-[310px] sm:max-w-[400px] md:max-w-[560px] lg:max-w-[680px] xl:max-w-[780px] h-auto select-none"
             style={{ filter:"drop-shadow(0 0 40px rgba(124,58,237,.65)) drop-shadow(0 0 100px rgba(100,20,200,.35))" }}
           />
         </div>
@@ -121,7 +121,7 @@ export default function HeroSection() {
               {words.map((word, i) => (
                 <div key={i} className="overflow-hidden">
                   <span className={`word inline-block font-display
-                    text-[clamp(2rem,6.5vw,5rem)]
+                    text-[clamp(2.8rem,9vw,5.5rem)]
                     tracking-wide leading-none
                     ${li === 1 && word === "Warrior." ? "text-[#cc1a1a]" : "text-white"}`}>
                     {word}{i < words.length - 1 ? "\u00A0" : ""}
@@ -141,13 +141,13 @@ export default function HeroSection() {
         {/* CTAs */}
         <div ref={ctaRef} style={{ opacity: 0 }} className="flex flex-col sm:flex-row gap-4">
           <button onClick={() => navigateTo("/programs")} id="cta-start-training"
-            className="px-10 py-4 text-[11px] tracking-[0.25em] uppercase font-semibold text-white
+            className="px-12 py-5 sm:px-10 sm:py-4 text-[12px] sm:text-[11px] tracking-[0.25em] uppercase font-bold sm:font-semibold text-white
                        bg-[#cc1a1a] hover:bg-[#dd2222] transition-all duration-300
                        hover:shadow-[0_0_50px_rgba(200,20,20,.5)]">
             Start Training
           </button>
           <button onClick={() => navigateTo("/about")} id="cta-our-story"
-            className="px-10 py-4 text-[11px] tracking-[0.25em] uppercase font-medium
+            className="px-12 py-5 sm:px-10 sm:py-4 text-[12px] sm:text-[11px] tracking-[0.25em] uppercase font-bold sm:font-medium
                        text-[#c4b5d4] border border-[#1a0f2e]
                        hover:border-[#7c3aed] hover:text-white transition-all duration-300">
             Our Story
