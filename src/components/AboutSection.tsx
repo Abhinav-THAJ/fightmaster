@@ -35,8 +35,8 @@ export default function AboutSection() {
       className="relative py-20 sm:py-28 lg:py-32 xl:py-36 overflow-hidden">
       <div className="absolute top-0 left-0 right-0 h-px red-sep" />
 
-      <div className="max-w-7xl mx-auto px-5 sm:px-8 lg:px-12 xl:px-16">
-        <div className="grid lg:grid-cols-2 gap-10 lg:gap-16 xl:gap-24 items-center">
+      <div className="max-w-7xl mx-auto px-5 sm:px-8 lg:px-10 xl:px-14">
+        <div className="grid lg:grid-cols-2 gap-10 lg:gap-14 xl:gap-24 items-center">
 
           {/* TEXT */}
           <div ref={textRef} className="flex flex-col gap-5 lg:gap-6">
@@ -83,7 +83,7 @@ export default function AboutSection() {
           </div>
 
           {/* IMAGE */}
-          <div ref={imageRef} className="relative mt-8 lg:mt-0">
+          <div ref={imageRef} className="relative mt-8 lg:mt-0 lg:pr-6 xl:pr-0">
             <div className="relative aspect-[4/5] overflow-hidden rounded-sm border border-[#1e0707]">
               <Image
                 src="/about_image.png" alt="Training at Rogue Ninja"
@@ -101,7 +101,7 @@ export default function AboutSection() {
             <div className="absolute -top-3 -left-3 w-10 h-10 border-t-2 border-l-2 border-[#cc1a1a]" />
             <div className="absolute -bottom-3 -right-3 w-10 h-10 border-b-2 border-r-2 border-[#cc1a1a]" />
             {/* Floating badge */}
-            <div className="absolute -right-4 sm:-right-6 xl:-right-10 top-1/4
+            <div className="absolute right-0 lg:-right-2 xl:-right-8 top-1/4
                             bg-[#0a0202] border border-[#1e0707] p-4 lg:p-5"
               style={{ boxShadow: "0 0 40px rgba(0,0,0,.6)" }}>
               <div className="text-3xl lg:text-4xl font-display text-[#cc1a1a]">3x</div>

@@ -66,10 +66,10 @@ export default function ProgramsSection() {
       className="relative py-20 sm:py-28 lg:py-32 xl:py-36 bg-[#090202] overflow-hidden">
       <div className="absolute top-0 left-0 right-0 h-px red-sep" />
 
-      <div className="max-w-7xl mx-auto px-5 sm:px-8 lg:px-12 xl:px-16">
+      <div className="max-w-7xl mx-auto px-5 sm:px-8 lg:px-10 xl:px-14">
 
         {/* Heading – centred via flex column */}
-        <div ref={headingRef} className="flex flex-col items-center text-center w-full mb-14 lg:mb-20">
+        <div ref={headingRef} className="flex flex-col items-center text-center w-full mb-16 lg:mb-24 xl:mb-28">
           <div className="flex items-center gap-4 mb-5">
             <div className="w-8 h-px bg-[#cc1a1a]" />
             <span className="text-[10px] tracking-[0.5em] uppercase text-[#cc6666]">Disciplines</span>

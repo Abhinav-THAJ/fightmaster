@@ -88,8 +88,8 @@ export default function HeroSection() {
         style={{ background:"linear-gradient(90deg,transparent 0%,#cc1a1a 40%,#cc1a1a 60%,transparent 100%)", boxShadow:"0 0 40px 8px rgba(200,20,20,.18)" }} />
 
       {/* Content */}
-      <div className="relative z-[5] w-full max-w-7xl mx-auto px-5 sm:px-8 lg:px-12 xl:px-16
-                      flex flex-col items-center text-center gap-4 sm:gap-5 mt-[72px]">
+      <div className="relative z-[5] w-full max-w-7xl mx-auto px-5 sm:px-8 lg:px-10 xl:px-14
+                      flex flex-col items-center text-center gap-4 sm:gap-5 mt-[78px] lg:mt-[84px]">
 
         {/* Tag */}
         <div ref={tagRef} style={{ opacity: 0 }}

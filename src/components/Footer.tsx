@@ -4,14 +4,15 @@ import Image from "next/image";
 
 export default function Footer() {
   return (
-    <footer className="relative border-t border-[#1e0707] py-10 px-5 sm:px-8 lg:px-12 overflow-hidden bg-[#060404]">
+    <footer className="relative border-t border-[#1e0707] py-10 px-5 sm:px-8 lg:px-10 xl:px-14 overflow-hidden bg-[#060404]">
       <div className="max-w-7xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-6">
         <Image
           src="/logo.png"
           alt="Rogue Ninja Fight Club"
-          width={110}
-          height={30}
-          className="h-7 w-auto opacity-50 hover:opacity-80 transition-opacity duration-300"
+          width={160}
+          height={44}
+          className="h-9 lg:h-11 w-auto opacity-70 hover:opacity-100 transition-opacity duration-300"
+          style={{ filter: "drop-shadow(0 0 8px rgba(200,20,20,.4))" }}
         />
         <div className="flex flex-col items-center gap-1">
           <p className="text-[9px] tracking-[0.25em] uppercase text-[#7a5555]">

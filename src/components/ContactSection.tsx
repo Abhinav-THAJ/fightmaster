@@ -43,7 +43,7 @@ export default function ContactSection() {
         style={{ background:"radial-gradient(ellipse 70% 60% at 50% 50%,rgba(80,0,0,.12) 0%,transparent 70%)" }} />
       <div className="absolute top-0 left-0 right-0 h-px red-sep" />
 
-      <div className="max-w-7xl mx-auto px-5 sm:px-8 lg:px-12 xl:px-16">
+      <div className="max-w-7xl mx-auto px-5 sm:px-8 lg:px-10 xl:px-14">
 
         {/* Heading */}
         <div className="flex flex-col items-center mb-14 lg:mb-16">

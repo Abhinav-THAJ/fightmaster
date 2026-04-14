@@ -24,31 +24,31 @@ export default function CTABanner() {
   }, []);
 
   return (
-    <section ref={sectionRef} className="relative py-20 sm:py-24 lg:py-28 px-5 overflow-hidden">
+    <section ref={sectionRef} className="relative py-24 sm:py-28 lg:py-36 px-5 sm:px-8 lg:px-10 xl:px-14 overflow-hidden">
       <div className="absolute inset-0 pointer-events-none glow-pulse"
         style={{ background:"radial-gradient(ellipse 70% 80% at 50% 50%,rgba(120,0,0,.18) 0%,transparent 70%)" }} />
       <div className="absolute top-0 left-0 right-0 h-px red-sep" />
       <div className="absolute bottom-0 left-0 right-0 h-px red-sep" />
 
-      <div className="cta-banner-content relative z-10 max-w-3xl mx-auto flex flex-col items-center">
-        <div className="flex items-center gap-4 mb-6">
+      <div className="cta-banner-content relative z-10 max-w-3xl mx-auto flex flex-col items-center text-center">
+        <div className="flex items-center justify-center gap-4 mb-6">
           <div className="w-8 h-px bg-[#cc1a1a]" />
           <span className="text-[10px] tracking-[0.5em] uppercase text-[#cc6666]">Ready to Begin?</span>
           <div className="w-8 h-px bg-[#cc1a1a]" />
         </div>
 
-        <h2 className="font-display text-white leading-none mb-6 w-full"
-          style={{ fontSize:"clamp(2.8rem,6vw,5rem)", textAlign:"center" }}>
+        <h2 className="font-display text-white leading-none mb-6 w-full text-center"
+          style={{ fontSize:"clamp(2.8rem,6vw,5rem)" }}>
           CLAIM YOUR<br />
           <span className="text-gradient-red">FREE TRIAL CLASS</span>
         </h2>
 
-        <p className="text-sm lg:text-[15px] text-[#b89090] mb-10 max-w-lg leading-relaxed" style={{ textAlign:"center" }}>
+        <p className="text-sm lg:text-[15px] text-[#b89090] mb-10 max-w-lg leading-relaxed text-center">
           First class is on us. No commitment, no pressure. Just pure training.
           Walk in a beginner. Leave as a warrior.
         </p>
 
-        <div className="flex flex-col sm:flex-row gap-4">
+        <div className="flex flex-col sm:flex-row gap-4 justify-center">
           <button
             onClick={() => document.getElementById("contact")?.scrollIntoView({ behavior:"smooth" })}
             id="cta-banner-btn"

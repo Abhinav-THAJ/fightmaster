@@ -56,27 +56,27 @@ export default function Navbar() {
         }`}
       >
         {/* Nav container — max-width matches page sections */}
-        <div className="max-w-7xl mx-auto px-5 sm:px-8 lg:px-12 xl:px-16
-                        flex items-center justify-between h-[68px]">
+        <div className="max-w-7xl mx-auto px-5 sm:px-8 lg:px-10 xl:px-14
+                        flex items-center h-[72px] lg:h-[76px]">
 
           {/* Logo */}
           <button onClick={() => scrollTo("hero")} className="flex-shrink-0" aria-label="Home">
             <Image
               src="/logo.png" alt="Rogue Ninja Fight Club"
-              width={160} height={44}
+              width={200} height={56}
               priority
-              className="h-10 w-auto"
+              className="h-11 lg:h-12 xl:h-14 w-auto"
               style={{ filter: "drop-shadow(0 0 10px rgba(200,20,20,.55))" }}
             />
           </button>
 
-          {/* Desktop links */}
-          <ul className="hidden md:flex items-center gap-1 lg:gap-2">
+          {/* Desktop links — truly centred via flex-1 */}
+          <ul className="hidden md:flex flex-1 items-center justify-center gap-1 lg:gap-3 xl:gap-4">
             {NAV_LINKS.map(({ label, href }) => (
               <li key={href}>
                 <button
                   onClick={() => scrollTo(href)}
-                  className={`relative px-4 lg:px-5 py-[22px] text-[11px] font-medium tracking-[0.22em] uppercase
+                  className={`relative px-4 lg:px-5 xl:px-6 py-[24px] text-[11px] lg:text-[12px] font-medium tracking-[0.22em] uppercase
                               transition-colors duration-300
                               ${activeSection === href ? "text-white" : "text-[#b08080] hover:text-white"}`}
                 >
@@ -84,7 +84,7 @@ export default function Navbar() {
                   {activeSection === href && (
                     <motion.span
                       layoutId="nav-indicator"
-                      className="absolute bottom-0 left-4 lg:left-5 right-4 lg:right-5 h-[2px] bg-[#cc1a1a] rounded-full"
+                      className="absolute bottom-0 left-4 lg:left-5 xl:left-6 right-4 lg:right-5 xl:right-6 h-[2px] bg-[#cc1a1a] rounded-full"
                       style={{ boxShadow: "0 0 12px rgba(204,26,26,.8)" }}
                     />
                   )}
@@ -97,8 +97,8 @@ export default function Navbar() {
           <button
             onClick={() => scrollTo("contact")}
             className="hidden md:inline-flex items-center
-                       text-[11px] font-semibold tracking-[0.2em] uppercase
-                       px-6 lg:px-7 py-2.5
+                       text-[11px] lg:text-[12px] font-semibold tracking-[0.2em] uppercase
+                       px-6 lg:px-8 xl:px-9 py-3
                        border border-[#cc1a1a] text-white
                        hover:bg-[#cc1a1a] transition-all duration-300
                        hover:shadow-[0_0_24px_rgba(200,20,20,.45)]"
