@@ -1,3 +1,20 @@
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "About | Demo",
+  description: "Demo - Professional restaurant website offering the best services and experience online.",
+  keywords: "restaurant, food, menu, dining, eat",
+  alternates: {
+    canonical: "https://example.com/about",
+  },
+  openGraph: {
+    title: "About | Demo",
+    description: "Demo - Professional restaurant website offering the best services and experience online.",
+    url: "https://example.com/about",
+    type: "website",
+  },
+};
+
 "use client";
 
 import AboutSection from "@/components/AboutSection";

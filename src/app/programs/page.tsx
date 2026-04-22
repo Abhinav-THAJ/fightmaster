@@ -1,3 +1,20 @@
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Programs | Demo",
+  description: "Demo - Professional restaurant website offering the best services and experience online.",
+  keywords: "restaurant, food, menu, dining, eat",
+  alternates: {
+    canonical: "https://example.com/programs",
+  },
+  openGraph: {
+    title: "Programs | Demo",
+    description: "Demo - Professional restaurant website offering the best services and experience online.",
+    url: "https://example.com/programs",
+    type: "website",
+  },
+};
+
 "use client";
 
 import { useEffect, useRef } from "react";
